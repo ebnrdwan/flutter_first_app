@@ -10,45 +10,61 @@ class VoteList extends StatefulWidget {
   Widget _itemWidgetBuilder(BuildContext context, int index) {
     return Card(
       elevation: 2.0,
+      semanticContainer: true,
       child: Column(
         children: <Widget>[
-          Text(_votes[index].text),
-          Row(
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  RaisedButton(
-                    textColor: SWITCH_TRACK,
-                    child: Text("yes"),
-                  ),
-                  RaisedButton(textColor: SWITCH_TRACK, child: Text("no"))
-                ],
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                _votes[index].text,
+                style: TextStyle(color: Colors.black, fontSize: 16),
               ),
-              Column(
-                children: <Widget>[
-                  Radio(
-                    value: "yes",
-                    activeColor: SWITCH_TRACK,
-                    groupValue: "yes",
-                  ),
-                  Radio(
-                    value: "no",
-                    activeColor: SWITCH_TRACK,
-                    groupValue: "no",
-                    onChanged: (string) {},
-                  ),
-                ],
+            ),
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Container(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  children: <Widget>[
+                    RaisedButton(
+                      textColor: SWITCH_TRACK,
+                      child: Text("yes"),
+                    ),
+                    RaisedButton(textColor: SWITCH_TRACK, child: Text("no"))
+                  ],
+                ),
+              ),
+              Container(
+                alignment: Alignment.centerRight,
+                child: Column(
+                  children: <Widget>[
+                    Radio(
+                      value: "yes",
+                      activeColor: SWITCH_TRACK,
+                      groupValue: "yes",
+                    ),
+                    Radio(
+                      value: "no",
+                      activeColor: SWITCH_TRACK,
+                      groupValue: "no",
+                      onChanged: (string) {},
+                    ),
+                  ],
+                ),
               )
             ],
           ),
           Row(
+            mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              RaisedButton(textColor: BLUE_BG, child: Text("Submit")),
+              FlatButton(textColor: BLUE_BG, child: Text("Submit")),
               SizedBox(
                 width: 20,
               ),
-              RaisedButton(
-                  textColor: SWITCH_TRACK, child: Text("show results")),
+              FlatButton(textColor: SWITCH_TRACK, child: Text("show results")),
             ],
           )
         ],
@@ -72,44 +88,77 @@ class VoteState extends State<VoteList> {
   Widget _itemWidgetBuilder(BuildContext context, int index) {
     return Card(
       elevation: 2.0,
+      borderOnForeground: true,
       child: Column(
         children: <Widget>[
-          Text(models[index].text),
+          Container(
+            alignment: Alignment(-0.9, 1),
+            margin: EdgeInsets.only(left: 8,top: 20,right: 0,bottom: 25),
+            child: Text(
+              models[index].text,
+              style: TextStyle(color: Colors.black, fontSize: 24),
+              textAlign: TextAlign.start,
+            ),
+          ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  RaisedButton(
+                  FlatButton(
                     textColor: SWITCH_TRACK,
-                    child: Text("yes"),
+                    child: Text("Yes",style: TextStyle(fontSize: 17)),
                   ),
-                  RaisedButton(textColor: SWITCH_TRACK, child: Text("no"))
+                  FlatButton(textColor: SWITCH_TRACK, child: Text("No"style: TextStyle(fontSize: 17)))
                 ],
               ),
               Column(
                 children: <Widget>[
                   Radio(
-                    value: "yes",
+                    value: "Yes",
                     activeColor: SWITCH_TRACK,
-                    groupValue: "yes",
+                    groupValue: "Yes",
+    onChanged: ,
                   ),
                   Radio(
-                    value: "no",
+                    value: "No",
                     activeColor: SWITCH_TRACK,
-                    groupValue: "no",
+                    groupValue: "No",
                   ),
                 ],
               )
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              RaisedButton(textColor: BLUE_BG, child: Text("Submit")),
-              SizedBox(
-                width: 20,
-              ),
-              RaisedButton(
-                  textColor: SWITCH_TRACK, child: Text("show results")),
+              ButtonTheme.bar(
+                child: ButtonBar(
+                  alignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    FlatButton(
+                      child: Text(
+                        'SUBMIT',
+                        semanticsLabel: 'Submit',
+                        style: TextStyle(fontSize: 17),
+                      ),
+                      textColor: Colors.blue.shade500,
+                      onPressed: () {
+                        print('pressed');
+                      },
+                    ),
+                    FlatButton(
+                      child: Text('SHOW RESULTS',
+                          semanticsLabel: 'Show Results',
+                          style: TextStyle(fontSize: 17)),
+                      textColor: Colors.grey.shade500,
+                      onPressed: () {
+                        print('pressed');
+                      },
+                    ),
+                  ],
+                ),
+              )
             ],
           )
         ],

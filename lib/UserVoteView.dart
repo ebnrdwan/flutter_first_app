@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_first_app/VoteView.dart';
 import 'package:flutter_first_app/resources/AppColors.dart';
-import './TestAnim.dart';
 
 class UserVoteView extends StatelessWidget {
   List<VoteModel> _models = [
@@ -24,8 +23,17 @@ class UserVoteView extends StatelessWidget {
             body: Column(
               children: <Widget>[
                 Container(
-
-                  child: Text("Vote list"),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      child: Text(
+                        "Vote List",
+                        style: TextStyle(color: Colors.blue, fontSize: 20),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                  alignment: Alignment.centerLeft,
                 ),
                 Expanded(child: VoteList(_models)),
               ],
